@@ -1,0 +1,73 @@
+{
+  "_Container-DKuhg5yl.js": {
+    "file": "assets/Container-DKuhg5yl.js",
+    "name": "Container",
+    "imports": [
+      "_GuestLayout-Bfno-8k0.js",
+      "resources/js/app.jsx"
+    ]
+  },
+  "_GuestLayout-Bfno-8k0.js": {
+    "file": "assets/GuestLayout-Bfno-8k0.js",
+    "name": "GuestLayout",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_TablePagination-CMvR7O5Q.js": {
+    "file": "assets/TablePagination-CMvR7O5Q.js",
+    "name": "TablePagination",
+    "imports": [
+      "_GuestLayout-Bfno-8k0.js",
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/ChartPage.jsx": {
+    "file": "assets/ChartPage-CYO73rdE.js",
+    "name": "ChartPage",
+    "src": "resources/js/Pages/ChartPage.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GuestLayout-Bfno-8k0.js",
+      "_Container-DKuhg5yl.js"
+    ]
+  },
+  "resources/js/Pages/CompaignsPage.jsx": {
+    "file": "assets/CompaignsPage-MR5kI2j0.js",
+    "name": "CompaignsPage",
+    "src": "resources/js/Pages/CompaignsPage.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GuestLayout-Bfno-8k0.js",
+      "_TablePagination-CMvR7O5Q.js"
+    ]
+  },
+  "resources/js/Pages/MailsPage.jsx": {
+    "file": "assets/MailsPage-eMX7imAU.js",
+    "name": "MailsPage",
+    "src": "resources/js/Pages/MailsPage.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_GuestLayout-Bfno-8k0.js",
+      "_Container-DKuhg5yl.js",
+      "_TablePagination-CMvR7O5Q.js"
+    ]
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-Dact1Owb.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/Pages/ChartPage.jsx",
+      "resources/js/Pages/CompaignsPage.jsx",
+      "resources/js/Pages/MailsPage.jsx"
+    ],
+    "css": [
+      "assets/app-CedjQpGr.css"
+    ]
+  }
+}
