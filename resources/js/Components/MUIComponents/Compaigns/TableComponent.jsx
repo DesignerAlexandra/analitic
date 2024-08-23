@@ -73,7 +73,7 @@ const preparation = (compaignData) => {
   for(let key in compaignData) {
       
       rows.push({
-      title: compaignData[key].compaignName,
+      title: 'ID: ' + key + ' | ' + compaignData[key].compaignName,
       clients: counterClients(compaignData[key].clients),
       clicks: compaignData[key].clicks,
       cost: compaignData[key].cost.toFixed(2),

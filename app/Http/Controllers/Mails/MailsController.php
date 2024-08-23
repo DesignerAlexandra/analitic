@@ -36,13 +36,17 @@ abstract class MailsController extends Controller
 
     public function index()
     {
-        $redis = Redis::command('SET', ['test', 1]);
-
         $dateUpdateDirect = $this->updateDirect::select(['date_check_update'])->limit(1)->get()->toArray()[0]['date_check_update'];
 
         $data = $this->model::select('client_mail', 'invoice_status', 'invoice_price')->distinct()->get();
 
-        return Inertia::render('MailsPage', ['data' => ['rows' => $data, 'title' => $this->title, 'dateUpdateDirect' => $dateUpdateDirect, 'test' => Redis::command('GET', ['test'])]]);
+        return Inertia::render('MailsPage', [
+            'data' => [
+                'rows' => $data,
+                'title' => $this->title,
+                'dateUpdateDirect' => $dateUpdateDirect,
+            ]
+        ]);
     }
 
     public function general(Request $request)
