@@ -15,7 +15,7 @@ import Button$1 from "@mui/material/Button/index.js";
 import Dialog from "@mui/material/Dialog/index.js";
 import DialogActions from "@mui/material/DialogActions/index.js";
 import DialogContent from "@mui/material/DialogContent/index.js";
-import { G as Guest } from "./GuestLayout-CzFaFlHE.js";
+import { G as Guest } from "./GuestLayout-D-NxDWvN.js";
 import axios from "axios";
 import "@mui/material/Box/index.js";
 import "@mui/icons-material";
@@ -176,7 +176,7 @@ const preparation = (compaignData) => {
   let rows = [];
   for (let key in compaignData) {
     rows.push({
-      title: compaignData[key].compaignName,
+      title: "ID: " + key + " | " + compaignData[key].compaignName,
       clients: counterClients(compaignData[key].clients),
       clicks: compaignData[key].clicks,
       cost: compaignData[key].cost.toFixed(2),
@@ -248,10 +248,47 @@ function TableComponent({ compaignsData }) {
     /* @__PURE__ */ jsx(ModalComponent, { handleClose, open, skeleton, dataForModal })
   ] });
 }
+const sumProfitClient = (clients) => {
+  let sum = 0;
+  if (clients.lenght) {
+    clients.forEach((client) => {
+      sum += Number(client.invoice_price);
+    });
+  }
+  return sum;
+};
+const sumValuesInData = (data) => {
+  let values = {
+    clientsIn1C: 0,
+    sumClicks: 0,
+    sumPriceForCompaign: 0,
+    profitBy1C: 0
+  };
+  if (data) {
+    for (let key in data) {
+      values.clientsIn1C += data[key].clients.length, values.sumClicks += data[key].clicks, values.sumPriceForCompaign += data[key].cost, values.profitBy1C = sumProfitClient(data[key].clients);
+    }
+    values = {
+      ...values,
+      clientsIn1C: values.clientsIn1C,
+      sumClicks: values.sumClicks,
+      sumPriceForCompaign: values.sumPriceForCompaign.toFixed(2),
+      profitBy1C: values.profitBy1C.toFixed(2)
+    };
+    return values;
+  }
+  return values;
+};
 const Compaigns = ({ data }) => {
   const [compaigns, setCompaigns] = useState([]);
   const [routePath] = useState(data.routePath);
   const [loader, setLoader] = useState(false);
+  const [valueData, setValueData] = useState({
+    clientsIn1C: 0,
+    sumClicks: 0,
+    sumPriceForCompaign: 0,
+    profitBy1C: 0
+  });
   const updateDirectDate = (date) => {
     setDateUpdate(date);
   };
@@ -274,6 +311,7 @@ const Compaigns = ({ data }) => {
     axios.post(route(routing)).then((result) => {
       console.log(result.data);
       setCompaigns(result.data.direct);
+      setValueData(sumValuesInData(result.data.direct));
       setLoader(true);
     }).catch((err) => {
       console.log(err);
@@ -286,7 +324,14 @@ const Compaigns = ({ data }) => {
     /* @__PURE__ */ jsx(ControlPanelComponent, { title: data.routePath }),
     /* @__PURE__ */ jsx("hr", {}),
     /* @__PURE__ */ jsx("br", {}),
-    /* @__PURE__ */ jsx(Grid, { container: true, children: /* @__PURE__ */ jsx(TableComponent, { compaignsData: compaigns }) })
+    /* @__PURE__ */ jsx(Grid, { container: true, children: /* @__PURE__ */ jsx(TableComponent, { compaignsData: compaigns }) }),
+    /* @__PURE__ */ jsxs(Grid, { container: true, sx: { padding: "15px", border: "solid black 1px" }, children: [
+      /* @__PURE__ */ jsx(Grid, { item: true, sx: { textAlign: "center" }, xs: 4.5, children: "ИТОГО:" }),
+      /* @__PURE__ */ jsx(Grid, { item: true, sx: { textAlign: "center" }, xs: 1.9, children: valueData.clientsIn1C }),
+      /* @__PURE__ */ jsx(Grid, { item: true, sx: { textAlign: "center" }, xs: 1.9, children: valueData.sumClicks }),
+      /* @__PURE__ */ jsx(Grid, { item: true, sx: { textAlign: "center" }, xs: 1.9, children: valueData.sumPriceForCompaign }),
+      /* @__PURE__ */ jsx(Grid, { item: true, sx: { textAlign: "center" }, xs: 1.8, children: valueData.profitBy1C })
+    ] })
   ] });
 };
 export {

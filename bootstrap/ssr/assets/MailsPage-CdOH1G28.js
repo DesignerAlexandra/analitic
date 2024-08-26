@@ -16,7 +16,7 @@ import Dialog from "@mui/material/Dialog/index.js";
 import DialogActions from "@mui/material/DialogActions/index.js";
 import DialogContent from "@mui/material/DialogContent/index.js";
 import axios from "axios";
-import { G as Guest } from "./GuestLayout-CzFaFlHE.js";
+import { G as Guest } from "./GuestLayout-D-NxDWvN.js";
 import "@mui/material/Box/index.js";
 import "@mui/icons-material";
 const ControlPanelComponent = ({ title }) => {

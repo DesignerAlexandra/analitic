@@ -7,6 +7,7 @@ use App\Models\UpdateDirect;
 use App\Services\APIHook\Yandex;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 use Inertia\Inertia;
 
 abstract class CompaignsController extends Controller
@@ -47,9 +48,25 @@ abstract class CompaignsController extends Controller
 
     public function dataByCompaigns()
     {
-        $metrics = $this->yandex->metricCompaign();
 
-        $dataOfMetrics = $this->prepareDataOfMetric($metrics['data']);
+        $metricData = Redis::get($this->title . '_metric_data');
+
+        if(!$metricData) {
+
+            $metrics = $this->yandex->metricCompaign();
+
+            $dataOfMetrics = $this->prepareDataOfMetric($metrics['data']);
+
+            Redis::set($this->title . '_metric_data', json_encode($dataOfMetrics), 60 * 60 * 24);
+
+        } else {
+
+            $dataOfMetrics = json_decode($metricData);
+
+        }
+        
+
+
 
         unset($metrics);
 

@@ -16,8 +16,11 @@ const checkUpdate = (date) => {
 };
 function Header({ dateUpdateDirect, updateDirectDate }) {
   const [updated, setUpdated] = React.useState(checkUpdate(dateUpdateDirect));
+  const [stateButton, setStateButton] = React.useState("success");
   const updateDirect = () => {
+    setStateButton("warning");
     axios.post(route("update.direct")).then((res) => {
+      console.log(res.data);
       updateDirectDate(res.data.date);
       setUpdated(true);
     }).catch((err) => {
@@ -35,7 +38,7 @@ function Header({ dateUpdateDirect, updateDirectDate }) {
         "Дата последнего обновления: ",
         dateUpdateDirect
       ] }),
-      /* @__PURE__ */ jsx(Button, { disabled: updated, variant: "contained", color: "success", onClick: updateDirect, children: updated ? /* @__PURE__ */ jsx(PublishedWithChanges, { sx: { "&, svg": { fontSize: "40px" } } }) : /* @__PURE__ */ jsx(Sync, { sx: { "&, svg": { fontSize: "40px" } } }) })
+      /* @__PURE__ */ jsx(Button, { disabled: updated, variant: "contained", color: stateButton, onClick: updateDirect, children: updated ? /* @__PURE__ */ jsx(PublishedWithChanges, { sx: { "&, svg": { fontSize: "40px" } } }) : /* @__PURE__ */ jsx(Sync, { sx: { "&, svg": { fontSize: "40px" } } }) })
     ] })
   ] });
 }
