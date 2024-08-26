@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, createRef } from "react";
 import { RestartAlt } from "@mui/icons-material";
 import Chart from "chart.js/auto";
-import { G as Guest } from "./GuestLayout-CzFaFlHE.js";
+import { G as Guest } from "./GuestLayout-D-NxDWvN.js";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo/index.js";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs/index.js";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/index.js";
@@ -58,11 +58,11 @@ function BasicTable({ castomMetric }) {
   return /* @__PURE__ */ jsx(TableContainer, { component: Paper, children: /* @__PURE__ */ jsxs(Table, { sx: { minWidth: 650, padding: "15px 0" }, "aria-label": "simple table", children: [
     /* @__PURE__ */ jsx(TableHead, { children: /* @__PURE__ */ jsxs(TableRow, { sx: { background: "rgba(1,87,155,.6)" }, children: [
       /* @__PURE__ */ jsx(TableCell, { align: "left" }),
-      /* @__PURE__ */ jsx(TableCell, { align: "center", children: "Визиты" }),
-      /* @__PURE__ */ jsx(TableCell, { align: "center", children: "Заявки" }),
-      /* @__PURE__ */ jsx(TableCell, { align: "center", children: "CPL" }),
-      /* @__PURE__ */ jsx(TableCell, { align: "center", children: "CPC" }),
-      /* @__PURE__ */ jsx(TableCell, { align: "center", children: "Cумма оплаченных счетов" })
+      /* @__PURE__ */ jsx(TableCell, { align: "center", children: /* @__PURE__ */ jsx("span", { style: { fontSize: "18px" }, children: "Визиты" }) }),
+      /* @__PURE__ */ jsx(TableCell, { align: "center", children: /* @__PURE__ */ jsx("span", { style: { fontSize: "18px" }, children: "Заявки" }) }),
+      /* @__PURE__ */ jsx(TableCell, { align: "center", children: /* @__PURE__ */ jsx("span", { style: { fontSize: "18px" }, children: "CPL" }) }),
+      /* @__PURE__ */ jsx(TableCell, { align: "center", children: /* @__PURE__ */ jsx("span", { style: { fontSize: "18px" }, children: "CPC" }) }),
+      /* @__PURE__ */ jsx(TableCell, { align: "center", children: /* @__PURE__ */ jsx("span", { style: { fontSize: "18px" }, children: "Cумма оплаченных счетов" }) })
     ] }) }),
     /* @__PURE__ */ jsxs(TableBody, { children: [
       /* @__PURE__ */ jsxs(

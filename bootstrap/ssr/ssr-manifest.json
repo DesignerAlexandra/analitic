@@ -1,46 +1,46 @@
 {
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "resources/js/Components/Chart/ControlPanelComponent.jsx": [
-    "/build/assets/ChartPage-CdzYV1O8.js"
+    "/build/assets/ChartPage-D_RHdrM_.js"
   ],
   "resources/js/Components/Compaigns/ControlPanelComponent.jsx": [
-    "/build/assets/CompaignsPage-msC2JICP.js"
+    "/build/assets/CompaignsPage-D-mmwEzZ.js"
   ],
   "resources/js/Components/Header.jsx": [
-    "/build/assets/GuestLayout-CzFaFlHE.js"
+    "/build/assets/GuestLayout-D-NxDWvN.js"
   ],
   "resources/js/Components/MUIComponents/Chart/CalendarComponent.jsx": [
-    "/build/assets/ChartPage-CdzYV1O8.js"
+    "/build/assets/ChartPage-D_RHdrM_.js"
   ],
   "resources/js/Components/MUIComponents/Chart/TableComponent.jsx": [
-    "/build/assets/ChartPage-CdzYV1O8.js"
+    "/build/assets/ChartPage-D_RHdrM_.js"
   ],
   "resources/js/Components/MUIComponents/Compaigns/ModalComponent.jsx": [
-    "/build/assets/CompaignsPage-msC2JICP.js"
+    "/build/assets/CompaignsPage-D-mmwEzZ.js"
   ],
   "resources/js/Components/MUIComponents/Compaigns/TableComponent.jsx": [
-    "/build/assets/CompaignsPage-msC2JICP.js"
+    "/build/assets/CompaignsPage-D-mmwEzZ.js"
   ],
   "resources/js/Components/MUIComponents/Mails/ModalComponent.jsx": [
-    "/build/assets/MailsPage-CpMRqVoA.js"
+    "/build/assets/MailsPage-CdOH1G28.js"
   ],
   "resources/js/Components/MUIComponents/Mails/TableComponent.jsx": [
-    "/build/assets/MailsPage-CpMRqVoA.js"
+    "/build/assets/MailsPage-CdOH1G28.js"
   ],
   "resources/js/Components/Mails/ControlPanelComponent.jsx": [
-    "/build/assets/MailsPage-CpMRqVoA.js"
+    "/build/assets/MailsPage-CdOH1G28.js"
   ],
   "resources/js/Layouts/GuestLayout.jsx": [
-    "/build/assets/GuestLayout-CzFaFlHE.js"
+    "/build/assets/GuestLayout-D-NxDWvN.js"
   ],
   "resources/js/Pages/ChartPage.jsx": [
-    "/build/assets/ChartPage-CdzYV1O8.js"
+    "/build/assets/ChartPage-D_RHdrM_.js"
   ],
   "resources/js/Pages/CompaignsPage.jsx": [
-    "/build/assets/CompaignsPage-msC2JICP.js"
+    "/build/assets/CompaignsPage-D-mmwEzZ.js"
   ],
   "resources/js/Pages/MailsPage.jsx": [
-    "/build/assets/MailsPage-CpMRqVoA.js"
+    "/build/assets/MailsPage-CdOH1G28.js"
   ],
   "resources/js/ssr.jsx": [],
   "vendor/tightenco/ziggy/dist/index.js": []
