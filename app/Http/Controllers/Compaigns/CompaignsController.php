@@ -49,7 +49,7 @@ abstract class CompaignsController extends Controller
     public function dataByCompaigns()
     {
 
-        $metricData = Redis::get($this->title . '_metric_data');
+        $metricData = Redis::get($this->title . '_data_metric');
 
         if(!$metricData) {
 
@@ -57,15 +57,15 @@ abstract class CompaignsController extends Controller
 
             $dataOfMetrics = $this->prepareDataOfMetric($metrics['data']);
 
-            Redis::set($this->title . '_metric_data', json_encode($dataOfMetrics), 60 * 60 * 24);
+            Redis::command('setex', [$this->title . '_data_metric', 60 * 60 * 24, json_encode($dataOfMetrics)]);
 
         } else {
 
-            $dataOfMetrics = json_decode($metricData);
+            $dataOfMetrics = json_decode($metricData, 1);
 
         }
-        
 
+       
 
 
         unset($metrics);
