@@ -65,7 +65,7 @@ const Compaigns = ({data}) => {
     }
     
     const fetchInvoice = () => {
-
+        setLoader(false)
         let routing = 'compaigns.wika.invoice'
 
         switch (routePath) {
@@ -111,26 +111,38 @@ const Compaigns = ({data}) => {
             <ControlPanelComponent title={data.routePath}/>
             <hr />
             <br/>
-            <Grid container>
-                <TableComponent compaignsData={compaigns}/>
-            </Grid>
-            <Grid container sx={{padding: '15px', border: 'solid black 1px'}}>
-                <Grid item sx={{textAlign: 'center'}}  xs={4.5}>
-                    ИТОГО: 
-                </Grid>
-                <Grid item sx={{textAlign: 'center'}} xs={1.9}>
-                    {valueData.clientsIn1C}
-                </Grid>
-                <Grid item sx={{textAlign: 'center'}} xs={1.9}>
-                    {valueData.sumClicks}
-                </Grid>
-                <Grid item sx={{textAlign: 'center'}} xs={1.9}>
-                    {valueData.sumPriceForCompaign}
-                </Grid>
-                <Grid item sx={{textAlign: 'center'}} xs={1.8}>
-                    {valueData.profitBy1C}
-                </Grid>
-            </Grid>
+            {
+                !loader ? (
+                    <Box sx={{display: 'dlex', justifyContent: 'center', alignItems: 'start'}}>
+                    <CircularProgress size={150} sx={{margin: '20px 0'}}/>
+                    </Box>
+                ) : (
+                    <>
+                    <Grid container>
+                        <TableComponent compaignsData={compaigns}/>
+                    </Grid>
+                    <Grid container sx={{padding: '15px', border: 'solid black 1px'}}>
+                        <Grid item sx={{textAlign: 'center'}}  xs={4.5}>
+                            ИТОГО: 
+                        </Grid>
+                        <Grid item sx={{textAlign: 'center'}} xs={1.9}>
+                            {valueData.clientsIn1C}
+                        </Grid>
+                        <Grid item sx={{textAlign: 'center'}} xs={1.9}>
+                            {valueData.sumClicks}
+                        </Grid>
+                        <Grid item sx={{textAlign: 'center'}} xs={1.9}>
+                            {valueData.sumPriceForCompaign}
+                        </Grid>
+                        <Grid item sx={{textAlign: 'center'}} xs={1.8}>
+                            {valueData.profitBy1C}
+                        </Grid>
+                    </Grid>
+                    </>
+                )
+            }
+
+            
         </Guest>
     )
 }
