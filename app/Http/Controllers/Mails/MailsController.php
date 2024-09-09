@@ -55,10 +55,10 @@ abstract class MailsController extends Controller
 
         $data1C = $this->model::select('client_id', 'invoice_id', 'invoice_status', 'invoice_date', 'invoice_price', 'client_code', 'client_mail')->where('client_mail', $mail)->distinct()->get();
 
-        $ym_uid = $this->modelVisits::select('_ym_uid')->where('client_id', $data1C[0]['client_id'])->limit(1)->get();
-
         $data = [];
         $sumPrice = 0;
+     
+        $ym_uid = $this->modelVisits::select('_ym_uid')->where('client_id', $data1C[0]['client_id'])->limit(1)->get();
 
         if(empty($ym_uid[0]['_ym_uid'])) {
             return $this->parse1CData($data1C);

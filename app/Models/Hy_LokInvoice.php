@@ -9,5 +9,6 @@ class Hy_LokInvoice extends Model
 {
     use HasFactory;
 
-    public $table = 'fluidline_hy_lok_InvoiceList';
+    protected $connection = 'hy-lok';
+    protected $table = 'InvoiceList';
 }

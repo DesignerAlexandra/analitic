@@ -16,4 +16,5 @@ Route::get('/mails/hylok', [MailsHylokController::class, 'index'])->name('hylok'
 Route::post('/mails/hylok', [MailsHylokController::class, 'general'])->name('hylok.general');
 
 Route::get('/mails/hy-lok', [MailsHy_lokController::class, 'index'])->name('hy-lok');
+Route::post('/mails/hy-lok', [MailsHy_lokController::class, 'general'])->name('hy-lok.general');
 

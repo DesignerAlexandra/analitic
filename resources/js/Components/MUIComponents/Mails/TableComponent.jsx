@@ -159,6 +159,9 @@ export default function TableComponent({data}) {
         case 'hylok':
           routePath = 'hylok.general'
           break;
+        case 'hy-lok':
+          routePath = 'hy-lok.general'
+          break;
       }
 
       axios.post(route(routePath), data)

@@ -20,6 +20,7 @@ return [
     'wika' => env('DB_CONNECTION_WIKA', 'mysql'),
     'swagelo' => env('DB_CONNECTION_SWAGELO', 'mysql'),
     'hylok' => env('DB_CONNECTION_HYLOK', 'mysql'),
+    'hyl-ok' => env('DB_CONNECTION_HY_LOK', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
