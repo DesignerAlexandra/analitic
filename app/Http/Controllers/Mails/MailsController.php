@@ -53,15 +53,26 @@ abstract class MailsController extends Controller
     {
         $mail = $request->post('mail');
 
-        $data1C = $this->model::select('client_id', 'invoice_id', 'invoice_status', 'invoice_date', 'invoice_price', 'client_code', 'client_mail')->where('client_mail', $mail)->distinct()->get();
+        $data1C = $this->model::select('client_id', 'invoice_id', 'invoice_status', 'invoice_date', 'invoice_price', 'client_code', 'client_mail')->where('client_mail', $mail)->distinct()->get()->toArray();
 
         $data = [];
         $sumPrice = 0;
      
-        $ym_uid = $this->modelVisits::select('_ym_uid')->where('client_id', $data1C[0]['client_id'])->limit(1)->get();
+       
 
-        if(empty($ym_uid[0]['_ym_uid'])) {
+        try {
+            
+            $ym_uid = $this->modelVisits::select('_ym_uid')->where('client_id', $data1C[0]['client_id'])->limit(1)->get()->toArray();
+
+            if(empty($ym_uid)) {
+                return $this->parse1CData($data1C);
+            }
+
+
+        } catch (\PDOException $th) {
+           
             return $this->parse1CData($data1C);
+
         }
 
 
