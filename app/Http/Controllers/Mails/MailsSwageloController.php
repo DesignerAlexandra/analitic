@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Mails;
 
-use App\Models\DirectSwagelo;
+use App\Models\Direct;
 use App\Models\SwageloInvoice;
 use App\Models\SwageloVisitor;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class MailsSwageloController extends MailsController
                 new SwageloVisitor(),
                 env('AUTH_TOKEN_METRIC_SWAGELO_HY_LOK'),
                 env('COUNTER_ID_METRIC_SWAGELO'),
-                new DirectSwagelo()
+                new Direct()
             );
         }
 }

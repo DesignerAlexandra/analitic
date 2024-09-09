@@ -37,7 +37,7 @@ class dev extends Command
     public function handle()
     {
       
-        $data1C = Hy_LokInvoice::select('client_id', 'invoice_id', 'invoice_status', 'invoice_date', 'invoice_price', 'client_code', 'client_mail')->where('client_mail', 'ekaterina_k1234@mail.ru')->distinct()->get()->toArray();
+        $data1C = Hy_LokInvoice::select('client_id', 'invoice_id', 'invoice_status', 'invoice_date', 'invoice_price', 'client_code', 'client_mail')->where('client_mail', 'kdshilkin@pharmstd.ru')->distinct()->get()->toArray();
      
         $ym_uid = Hy_LokVisitor::select('_ym_uid')->where('client_id', $data1C[0]['client_id'])->limit(1)->get()->toArray();
 

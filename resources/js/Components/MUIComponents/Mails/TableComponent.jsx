@@ -109,6 +109,7 @@ export default function TableComponent({data}) {
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [rows, setRows] = React.useState(converter(data.rows))
     const [open, setOpen] = React.useState(false);
+    const [errAlert, setErrAlert] = React.useState(false);
     const [dataModal, setDataModal] = React.useState({
       headers: {
         title: data.title,
@@ -144,6 +145,7 @@ export default function TableComponent({data}) {
     const fetch = (mail) => {
       setOpen(true)
       setSkeleton(false)
+      setErrAlert(false);
       const data = new FormData
     
       data.set('mail', mail)
@@ -183,6 +185,8 @@ export default function TableComponent({data}) {
         })
       })
       .catch(err => {
+        setErrAlert(true);
+        setSkeleton(true);
         console.log(err);
       })
     
@@ -251,7 +255,7 @@ export default function TableComponent({data}) {
             onRowsPerPageChange={handleChangeRowsPerPage}
             labelRowsPerPage={'Выводить по :'}
         />
-        <ModalComponent dataModal={dataModal} handleClose={handleClose} open={open} skeleton={skeleton}/>
+        <ModalComponent dataModal={dataModal} handleClose={handleClose} open={open} skeleton={skeleton} errAlert={errAlert}/>
     </Paper>
   );    
 }

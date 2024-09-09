@@ -3,9 +3,9 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import { Container, Grid, Skeleton, Typography } from '@mui/material';
+import { Alert, Container, Grid, Skeleton, Typography } from '@mui/material';
 
-export default function ModalComponent({open, handleClose, dataModal, skeleton, data}) {
+export default function ModalComponent({open, handleClose, dataModal, skeleton, data, errAlert}) {
 
     const render = React.useCallback((obj) => {
         const html = [];
@@ -192,6 +192,15 @@ export default function ModalComponent({open, handleClose, dataModal, skeleton, 
                     </> : ''
                 }
                 {dataModal ? render(dataModal.data) : ''}
+                {errAlert ? 
+                    <Grid container className='card_group'>
+                    <Grid item xs={12}>
+                        <Typography variant='h4'>
+                            <Alert severity="error">Данные о пользователе отсутствуют !</Alert> 
+                        </Typography>
+                    </Grid>
+                    </Grid>
+                : ''}
                 </Grid>
            </Grid>
         </DialogContent>

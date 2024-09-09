@@ -169,8 +169,8 @@ abstract class MailsController extends Controller
         $params = mb_substr($cmId, mb_strpos($cmId, '=') + 1, mb_strlen($cmId));
         $arryCmId = explode('_', $params);
         $data = [
-            'CompaignId' => $arryCmId[0],
-            'AdGroupId' => $arryCmId[1]
+            'CompaignId' => $arryCmId[0] ?: 'Отсутствует',
+            'AdGroupId' => array_key_exists(1, $arryCmId) ? $arryCmId[1] : 'Отсутствует'
         ];
 
         return $data;

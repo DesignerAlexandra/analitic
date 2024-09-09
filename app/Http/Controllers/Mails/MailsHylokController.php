@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Mails;
 
-use App\Models\DirectHylok;
+use App\Models\Direct;
 use App\Models\HylokInvoice;
 use App\Models\HylokVisitor;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class MailsHylokController extends MailsController
             new HylokVisitor(),
             env('AUTH_TOKEN_METRIC_HYLOK'),
             env('COUNTER_ID_METRIC_HYLOK'),
-            new DirectHylok(),
+            new Direct(),
         );
     }
 }

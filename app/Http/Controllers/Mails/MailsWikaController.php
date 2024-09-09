@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Mails;
 
+use App\Models\Direct;
 use App\Models\DirectWika;
 use App\Models\WikaInvoice;
 use App\Models\WikaVisitor;
@@ -19,7 +20,7 @@ class MailsWikaController extends MailsController
             new WikaVisitor(),
             env('AUTH_TOKEN_METRIC_WIKA'),
             env('COUNTER_ID_METRIC_WIKA'),
-            new DirectWika()
+            new Direct()
         );
     }
 
