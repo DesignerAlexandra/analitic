@@ -90,7 +90,15 @@ abstract class MailsController extends Controller
         $data['sum_price'] = $sumPrice;
         $data['client_ym_uid'] = $ym_uid[0]['_ym_uid'];
 
-        $dataMetric = $this->yandex->metricById($ym_uid[0]['_ym_uid']);
+        try {
+
+            $dataMetric = $this->yandex->metricById($ym_uid[0]['_ym_uid']);
+
+        } catch (\Throwable $th) {
+
+            return $this->parse1CData($data1C);
+            
+        }
 
         $countClicks = count($dataMetric['data']);
         $data['countClicks'] = $countClicks;

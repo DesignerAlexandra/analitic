@@ -12,6 +12,7 @@ use App\Models\Hy_LokVisitor;
 use App\Models\HylokInvoice;
 use App\Models\HylokVisitor;
 use App\Models\UpdateDirect;
+use App\Services\APIHook\Yandex;
 use Illuminate\Console\Command;
 use ReflectionClass;
 
@@ -37,11 +38,18 @@ class dev extends Command
     public function handle()
     {
       
-        $data1C = Hy_LokInvoice::select('client_id', 'invoice_id', 'invoice_status', 'invoice_date', 'invoice_price', 'client_code', 'client_mail')->where('client_mail', 'kdshilkin@pharmstd.ru')->distinct()->get()->toArray();
-     
-        $ym_uid = Hy_LokVisitor::select('_ym_uid')->where('client_id', $data1C[0]['client_id'])->limit(1)->get()->toArray();
+        $yandex = new Yandex(env('AUTH_TOKEN_METRIC_SWAGELO_HY_LOK'), env('COUNTER_ID_METRIC_SWAGELO'));
 
-        dd($ym_uid);
+        try {
+
+            $dataMetric = $yandex->metricById('');
+
+        } catch (\Throwable $th) {
+            dd('yes');
+        }
+        
+
+        dd($dataMetric);
 
     }
 }
