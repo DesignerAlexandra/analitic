@@ -116,11 +116,16 @@ abstract class ChartController extends Controller
             }
         });
 
+        $minDate = min($entryPoints);
+
+        $maxDate = max($entryPoints);
+
+        $fullEntryPoints = $this->prepareDataEntryPoints($minDate, $maxDate);
 
         $newChartMail = [];
         $newChartPhone = [];
 
-        foreach ($entryPoints as $point) {
+        foreach ($fullEntryPoints as $point) {
             if(isset($chartMail[$point])) {
                 $newChartMail[$point] = $chartMail[$point];
             } else {
@@ -135,7 +140,7 @@ abstract class ChartController extends Controller
 
         return Inertia::render('ChartPage', [
             'title' => $this->title,
-            'entryPoints' => $entryPoints,
+            'entryPoints' => $fullEntryPoints,
             'chartMail' => $newChartMail,
             'chartPhone' => $newChartPhone,
             'generalData' => [
@@ -144,7 +149,7 @@ abstract class ChartController extends Controller
                 'sumPriceForCalls' => number_format($sumPriceForCalls, 2, '.', ''),
                 'sumPriceForMails' => number_format($sumPriceForMails, 2, '.', ''),
             ],
-            'dateUpdateDirect' => $dateUpdateDirect
+            'dateUpdateDirect' => $dateUpdateDirect,
         ]);
     }
 
@@ -234,9 +239,15 @@ abstract class ChartController extends Controller
             }
         });
 
+        $minDate = min($entryPoints);
+
+        $maxDate = max($entryPoints);
+
+        $fullEntryPoints = $this->prepareDataEntryPoints($minDate, $maxDate);
+
         $newChartPhone = [];
         $newChartInvoice = [];
-        foreach ($entryPoints as $point) {
+        foreach ($fullEntryPoints as $point) {
             if(isset($chartInvoice[$point])) {
                 $newChartInvoice[$point] = $chartInvoice[$point];
             } else {
@@ -281,7 +292,7 @@ abstract class ChartController extends Controller
         }
 
         return [
-                'entryPoints' => $entryPoints,
+                'entryPoints' => $fullEntryPoints,
                 'chartPhone' => $newChartPhone,
                 'chartInvoice' => $newChartInvoice,
                 'countMails' => $countMail,
@@ -385,5 +396,24 @@ abstract class ChartController extends Controller
         $data = $metric[0]['metrics'][0];
 
         return $data;
+    }
+
+    private function prepareDataEntryPoints($dateFrom, $dateTo): array
+    {
+
+        $dates = [];
+
+        $start_date_obj = new \DateTime($dateFrom);
+        $end_date_obj = new \DateTime($dateTo);
+
+        $interval = new \DateInterval('P1D');
+
+        $current_date_obj = $start_date_obj;
+        while ($current_date_obj <= $end_date_obj) {
+            $dates[] = $current_date_obj->format('Y-m-d');
+            $current_date_obj->add($interval);
+        }
+
+        return $dates;
     }
 }

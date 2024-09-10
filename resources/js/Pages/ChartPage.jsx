@@ -13,14 +13,13 @@ const preparationOfPoints = (obj) => {
     for(let key in obj) {
         arr.push(obj[key])
     }
-
     return arr
 }
 
 export default function ChartPage({chartPhone, chartMail, entryPoints, generalData, dateUpdateDirect, title}) {
-
+    
     const reset = () => {
-        chart.data.labels = preparationOfPoints(entryPoints).map(point => point)
+        chart.data.labels = entryPoints.map(point => point)
         chart.data.datasets = [
             {
             label: 'Количества писем за период',
@@ -82,7 +81,8 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
         }
 
         axios.post(route(routePath), data)
-        .then(res => {            
+        .then(res => {
+            
             setInvoiceData({...invoiveData, 
                 countMails: res.data.countMails,
                 sumPriceForMails: res.data.sumPriceForMails,
@@ -100,8 +100,8 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
                 mailPrice: res.data.castomMetric.mailPrice,
                 phonePrice: res.data.castomMetric.phonePrice,
             })
-
-            chart.data.labels = preparationOfPoints(res.data.entryPoints).map(point => point)
+            
+            chart.data.labels = res.data.entryPoints.map(point => point)
             chart.data.datasets = [
                 {
                 label: 'Количества писем за период',
@@ -187,7 +187,7 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
            {
                type: 'line',
                data: {
-               labels: preparationOfPoints(entryPoints).map(point => point),
+               labels: entryPoints.map(point => point),
                datasets: [
                    {
                    label: 'Количества писем за период',
