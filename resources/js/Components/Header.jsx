@@ -19,7 +19,7 @@ const checkUpdate = (date) => {
 export default function Header({dateUpdateDirect, updateDirectDate}) {
   const [updated, setUpdated] = React.useState(checkUpdate(dateUpdateDirect));
   const [stateButton, setStateButton] = React.useState('warning');
-  const [disabled, setDisabled] = React.useState(false)
+  const [disabled, setDisabled] = React.useState(checkUpdate(dateUpdateDirect))
   const updateDirect = () => {
     setUpdated(true)
     setStateButton('success')
