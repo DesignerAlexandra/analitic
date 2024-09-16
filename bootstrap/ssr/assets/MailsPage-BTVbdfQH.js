@@ -25,7 +25,8 @@ const ControlPanelComponent = ({ title }) => {
     wika: false,
     swagelo: false,
     hylok: false,
-    hy_lok: false
+    hy_lok: false,
+    fluidLine: false
   };
   const [checkDisabled, setCheckDisabled] = useState(state);
   useEffect(() => {
@@ -42,13 +43,17 @@ const ControlPanelComponent = ({ title }) => {
       case "hy-lok":
         setCheckDisabled({ ...checkDisabled, hy_lok: true });
         break;
+      case "fluidLine":
+        setCheckDisabled({ ...checkDisabled, fluidLine: true });
+        break;
     }
   }, [title]);
   return /* @__PURE__ */ jsx(Grid, { container: true, sx: { padding: "10px" }, children: /* @__PURE__ */ jsx(Grid, { item: true, xs: 12, children: /* @__PURE__ */ jsxs(ButtonGroup, { color: "info", variant: "contained", size: "large", "aria-label": "Large button group", children: [
     /* @__PURE__ */ jsx(Link, { href: route("wika"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.wika, children: "Wika" }) }),
     /* @__PURE__ */ jsx(Link, { href: route("swagelo"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.swagelo, children: "Swagelo" }) }),
     /* @__PURE__ */ jsx(Link, { href: route("hylok"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.hylok, children: "Hylok" }) }),
-    /* @__PURE__ */ jsx(Link, { href: route("hy-lok"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.hy_lok, children: "Hy-lok" }) })
+    /* @__PURE__ */ jsx(Link, { href: route("hy-lok"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.hy_lok, children: "Hy-lok" }) }),
+    /* @__PURE__ */ jsx(Link, { href: route("fluidLine"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.fluidLine, children: "fluidLine" }) })
   ] }) }) });
 };
 function ModalComponent({ open, handleClose, dataModal, skeleton, data, errAlert }) {
