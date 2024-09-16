@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Mails\MailsFluidLineController;
 use App\Http\Controllers\Mails\MailsHy_lokController;
 use App\Http\Controllers\Mails\MailsHylokController;
 use App\Http\Controllers\Mails\MailsSwageloController;
@@ -18,3 +19,5 @@ Route::post('/mails/hylok', [MailsHylokController::class, 'general'])->name('hyl
 Route::get('/mails/hy-lok', [MailsHy_lokController::class, 'index'])->name('hy-lok');
 Route::post('/mails/hy-lok', [MailsHy_lokController::class, 'general'])->name('hy-lok.general');
 
+Route::get('/mails/fluidLine', [MailsFluidLineController::class, 'index'])->name('fluidLine');
+Route::post('/mails/fluidLine', [MailsFluidLineController::class, 'general'])->name('fluidLine.general');
