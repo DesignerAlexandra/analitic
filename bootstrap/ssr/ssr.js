@@ -338,7 +338,7 @@ createServer(
     page,
     render: ReactDOMServer.renderToString,
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, /* @__PURE__ */ Object.assign({ "./Pages/ChartPage.jsx": () => import("./assets/ChartPage-DPNgYj-G.js"), "./Pages/CompaignsPage.jsx": () => import("./assets/CompaignsPage-B91X6V5j.js"), "./Pages/MailsPage.jsx": () => import("./assets/MailsPage-BTVbdfQH.js") })),
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, /* @__PURE__ */ Object.assign({ "./Pages/ChartPage.jsx": () => import("./assets/ChartPage-DPNgYj-G.js"), "./Pages/CompaignsPage.jsx": () => import("./assets/CompaignsPage-B91X6V5j.js"), "./Pages/MailsPage.jsx": () => import("./assets/MailsPage-B3GBaKaY.js") })),
     setup: ({ App, props }) => {
       global.route = (name, params, absolute) => T(name, params, absolute, {
         ...page.props.ziggy,

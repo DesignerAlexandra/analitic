@@ -22,13 +22,13 @@
     "/build/assets/CompaignsPage-B91X6V5j.js"
   ],
   "resources/js/Components/MUIComponents/Mails/ModalComponent.jsx": [
-    "/build/assets/MailsPage-BTVbdfQH.js"
+    "/build/assets/MailsPage-B3GBaKaY.js"
   ],
   "resources/js/Components/MUIComponents/Mails/TableComponent.jsx": [
-    "/build/assets/MailsPage-BTVbdfQH.js"
+    "/build/assets/MailsPage-B3GBaKaY.js"
   ],
   "resources/js/Components/Mails/ControlPanelComponent.jsx": [
-    "/build/assets/MailsPage-BTVbdfQH.js"
+    "/build/assets/MailsPage-B3GBaKaY.js"
   ],
   "resources/js/Layouts/GuestLayout.jsx": [
     "/build/assets/GuestLayout-DDh6SlH4.js"
@@ -40,7 +40,7 @@
     "/build/assets/CompaignsPage-B91X6V5j.js"
   ],
   "resources/js/Pages/MailsPage.jsx": [
-    "/build/assets/MailsPage-BTVbdfQH.js"
+    "/build/assets/MailsPage-B3GBaKaY.js"
   ],
   "resources/js/ssr.jsx": [],
   "vendor/tightenco/ziggy/dist/index.js": []

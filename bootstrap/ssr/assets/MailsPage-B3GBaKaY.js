@@ -239,7 +239,13 @@ const columns = [
 ];
 function maskEmailAddress(email) {
   const [username, domain] = email.split("@");
-  const maskedDomain = domain.replace(/./g, "*");
+  console.log(domain);
+  let maskedDomain = "";
+  if (domain == null) {
+    maskedDomain = "**********";
+  } else {
+    maskedDomain = domain.replace(/./g, "*");
+  }
   return `${username}@${maskedDomain}`;
 }
 const converter = (data) => {
