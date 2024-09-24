@@ -119,7 +119,8 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
         })
         .catch(err => console.log(err))
     }
-
+    console.log(generalData);
+    
     const [dataMail, setDataMail] = useState(parse(chartMail))
     const [dataPhone, setDataPhone] = useState(parse(chartPhone))
     const [dataEntryPoints, setDataEntryPoints] = useState(entryPoints)

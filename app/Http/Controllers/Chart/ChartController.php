@@ -41,7 +41,7 @@ abstract class ChartController extends Controller
     {
         $dateUpdateDirect = $this->updateDirect::select(['date_check_update'])->limit(1)->get()->toArray()[0]['date_check_update'];
 
-        $dataInvoice = $this->modelInvoice::select('invoice_date', 'invoice_status', 'client_mail_id', 'invoice_price')->distinct()->get();
+        $dataInvoice = $this->modelInvoice::select('invoice_date', 'invoice_status', 'client_mail', 'invoice_price')->distinct()->get();
 
         $sateliPhone = $this->sateliPhone::select('client_phone', 'invoice_status', 'invoice_price', 'invoice_date')->get();
  
@@ -66,12 +66,10 @@ abstract class ChartController extends Controller
         $entryPoints = [];
 
         $chartMail = [];
-        $countMail = 0;
         $sumPriceForMails = 0.00;
 
         foreach ($dataInvoice as $key => $value) {
             $dataInvoice[$key]['invoice_date'] = date('Y-m-d', strtotime($value['invoice_date']));
-            $countMail++;
             if(!isset($chartMail[$value['invoice_date']])) {
                 $entryPoints[] = date('Y-m-d', strtotime($value['invoice_date']));
                 $chartMail[$value['invoice_date']] = 1;
@@ -144,7 +142,7 @@ abstract class ChartController extends Controller
             'chartMail' => $newChartMail,
             'chartPhone' => $newChartPhone,
             'generalData' => [
-                'countMails' => $countMail,
+                'countMails' => $dataInvoice->count(),
                 'countCalls' => $countPhone,
                 'sumPriceForCalls' => number_format($sumPriceForCalls, 2, '.', ''),
                 'sumPriceForMails' => number_format($sumPriceForMails, 2, '.', ''),
@@ -164,7 +162,7 @@ abstract class ChartController extends Controller
         $dateTo = date('Y-m-d', strtotime($validated['dateTo']));
         $entryPoints = [];
 
-        $dataInvoice = $this->modelInvoice::select('invoice_date', 'invoice_status', 'client_mail_id', 'invoice_price')
+        $dataInvoice = $this->modelInvoice::select('invoice_date', 'invoice_status', 'client_mail', 'invoice_price')
         ->where([
             ['invoice_date', '>=', "$dateFrom 00:00:00"],
             ['invoice_date', '<=', "$dateTo 23:59:59"]
@@ -190,11 +188,9 @@ abstract class ChartController extends Controller
             }
         }
 
-        $countMail = 0;
         $sumPriceForMails = 0.00;
         $chartInvoice = [];
         foreach ($dataInvoice as $key => $dateInvoice) {
-            $countMail++;
             $entryPoints[] = date('Y-m-d', strtotime($dateInvoice['invoice_date']));
             if(array_key_exists(date('Y-m-d', strtotime($dateInvoice['invoice_date'])), $chartInvoice)) {
                 $chartInvoice[date('Y-m-d', strtotime($dateInvoice['invoice_date']))]++;
@@ -295,7 +291,7 @@ abstract class ChartController extends Controller
                 'entryPoints' => $fullEntryPoints,
                 'chartPhone' => $newChartPhone,
                 'chartInvoice' => $newChartInvoice,
-                'countMails' => $countMail,
+                'countMails' => $dataInvoice->count(),
                 'countCalls' => $countPhone,
                 'sumPriceForCalls' => number_format($sumPriceForCalls, 2, '.', ''),
                 'sumPriceForMails' => number_format($sumPriceForMails, 2, '.', ''),
@@ -304,7 +300,7 @@ abstract class ChartController extends Controller
                     'cpc' => number_format($cpc, 2, '.', ''),
                     'invoices' => $invoicesMail->count() + $invoicePhones->count(),
                     'visits' => $countCliks,
-                    'invoicesMail' => $countMail,
+                    'invoicesMail' => $dataInvoice->count(),
                     'invoicePhones' => $countPhone,
                     'mailPrice' => number_format($sumPriceForMails, 2, '.', ''),
                     'phonePrice' => number_format($sumPriceForCalls, 2, '.', ''),
@@ -347,7 +343,7 @@ abstract class ChartController extends Controller
 
         $phonesPrice = $this->sateliPhone::whereIn('client_phone', $phones)->distinct()->get('invoice_price')->where('invoice_status', 2)->sum('invoice_price');
 
-        $invoicesMail = $this->modelInvoice::select('client_mail', 'invoice_status', 'invoice_price')->distinct()->get();
+        $invoicesMail = $this->modelInvoice::select('invoice_date', 'invoice_status', 'client_mail', 'invoice_price')->distinct()->get();
 
         $mailPrice = $this->modelInvoice::select('invoice_price')->where('invoice_status', 2)->distinct()->get()->sum('invoice_price');
 
