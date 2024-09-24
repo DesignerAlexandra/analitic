@@ -239,7 +239,6 @@ const columns = [
 ];
 function maskEmailAddress(email) {
   const [username, domain] = email.split("@");
-  console.log(domain);
   let maskedDomain = "";
   if (domain == null) {
     maskedDomain = "**********";
@@ -341,6 +340,9 @@ function TableComponent({ data }) {
         break;
       case "hy-lok":
         routePath = "hy-lok.general";
+        break;
+      case "fluidLine":
+        routePath = "fluidLine.general";
         break;
     }
     axios.post(route(routePath), data2).then((res) => {

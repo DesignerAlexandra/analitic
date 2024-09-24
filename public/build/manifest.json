@@ -1,63 +1,63 @@
 {
-  "_Container-CBouATr2.js": {
-    "file": "assets/Container-CBouATr2.js",
+  "_Container-C5YpqhzX.js": {
+    "file": "assets/Container-C5YpqhzX.js",
     "name": "Container",
     "imports": [
-      "_GuestLayout-BCqUzDz7.js",
+      "_GuestLayout-epAu5EQV.js",
       "resources/js/app.jsx"
     ]
   },
-  "_GuestLayout-BCqUzDz7.js": {
-    "file": "assets/GuestLayout-BCqUzDz7.js",
+  "_GuestLayout-epAu5EQV.js": {
+    "file": "assets/GuestLayout-epAu5EQV.js",
     "name": "GuestLayout",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_TablePagination-CG4Abe2J.js": {
-    "file": "assets/TablePagination-CG4Abe2J.js",
+  "_TablePagination-BA2S-FJ6.js": {
+    "file": "assets/TablePagination-BA2S-FJ6.js",
     "name": "TablePagination",
     "imports": [
-      "_GuestLayout-BCqUzDz7.js",
+      "_GuestLayout-epAu5EQV.js",
       "resources/js/app.jsx"
     ]
   },
   "resources/js/Pages/ChartPage.jsx": {
-    "file": "assets/ChartPage-CbYfSRWk.js",
+    "file": "assets/ChartPage-DMiafxvf.js",
     "name": "ChartPage",
     "src": "resources/js/Pages/ChartPage.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_GuestLayout-BCqUzDz7.js",
-      "_Container-CBouATr2.js"
+      "_GuestLayout-epAu5EQV.js",
+      "_Container-C5YpqhzX.js"
     ]
   },
   "resources/js/Pages/CompaignsPage.jsx": {
-    "file": "assets/CompaignsPage-CvdWV6bK.js",
+    "file": "assets/CompaignsPage-By8ST7Ss.js",
     "name": "CompaignsPage",
     "src": "resources/js/Pages/CompaignsPage.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_GuestLayout-BCqUzDz7.js",
-      "_TablePagination-CG4Abe2J.js"
+      "_GuestLayout-epAu5EQV.js",
+      "_TablePagination-BA2S-FJ6.js"
     ]
   },
   "resources/js/Pages/MailsPage.jsx": {
-    "file": "assets/MailsPage-DiSTv0k6.js",
+    "file": "assets/MailsPage-n_7rEbte.js",
     "name": "MailsPage",
     "src": "resources/js/Pages/MailsPage.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_GuestLayout-BCqUzDz7.js",
-      "_Container-CBouATr2.js",
-      "_TablePagination-CG4Abe2J.js"
+      "_GuestLayout-epAu5EQV.js",
+      "_Container-C5YpqhzX.js",
+      "_TablePagination-BA2S-FJ6.js"
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-CJcyzfdM.js",
+    "file": "assets/app-C-mBsMH5.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
