@@ -44,6 +44,8 @@ abstract class ChartController extends Controller
         $dataInvoice = $this->modelInvoice::select('invoice_date', 'invoice_status', 'client_mail', 'invoice_price')->distinct()->get();
 
         $sateliPhone = $this->sateliPhone::select('client_phone', 'invoice_status', 'invoice_price', 'invoice_date')->get();
+
+        $mailPrice = $this->modelInvoice::select('invoice_price')->where('invoice_status', 2)->distinct()->get()->sum('invoice_price');
  
         $haystack = [];
         foreach ($sateliPhone as $key => $value) {
@@ -66,7 +68,6 @@ abstract class ChartController extends Controller
         $entryPoints = [];
 
         $chartMail = [];
-        $sumPriceForMails = 0.00;
 
         foreach ($dataInvoice as $key => $value) {
             $dataInvoice[$key]['invoice_date'] = date('Y-m-d', strtotime($value['invoice_date']));
@@ -75,9 +76,6 @@ abstract class ChartController extends Controller
                 $chartMail[$value['invoice_date']] = 1;
             } else {
                 $chartMail[$value['invoice_date']]++;
-            }
-            if($value['invoice_status'] == 2) {
-                $sumPriceForMails = $sumPriceForMails + $dataInvoice[$key]['invoice_price'];
             }
         }
 
@@ -145,7 +143,7 @@ abstract class ChartController extends Controller
                 'countMails' => $dataInvoice->count(),
                 'countCalls' => $countPhone,
                 'sumPriceForCalls' => number_format($sumPriceForCalls, 2, '.', ''),
-                'sumPriceForMails' => number_format($sumPriceForMails, 2, '.', ''),
+                'sumPriceForMails' => number_format($mailPrice, 2, '.', ''),
             ],
             'dateUpdateDirect' => $dateUpdateDirect,
         ]);
@@ -308,24 +306,6 @@ abstract class ChartController extends Controller
             ];
     }
 
-    // НЕ ИСПОЛЬЗУЕТСЯ
-    public function fetchDirect()
-    {
-        $compaignsId = $this->parserForMetricByCompaign($this->yandex->metricIdCompaign()['data']);
-
-        $fromDate = date('Y-m-d', strtotime($this->direct::select(['Date'])->whereIn('CampaignId', $compaignsId)->limit(1)->get()->toArray()[0]['Date']));
-        $toDate = date('Y-m-d', strtotime($this->direct::select(['Date'])->whereIn('CampaignId', $compaignsId)->orderByRaw('Date DESC')->limit(1)->get()->toArray()[0]['Date']));
-        $sumPrice = $this->direct::whereIn('CampaignId', $compaignsId)->sum('Cost');
-        $countCliks = $this->direct::whereIn('CampaignId', $compaignsId)->sum('Clicks');
-
-        return [
-            'fromDate' => $fromDate,
-            'toDate' => $toDate,
-            'sumPrice' => number_format($sumPrice, 2, '.', ''),
-            'countCliks' => $countCliks
-            ];
-    }
-
     public function getCastomMetric()
     {
         $compaignsId = $this->parserForMetricByCompaign($this->yandex->metricIdCompaign()['data']);
@@ -383,13 +363,6 @@ abstract class ChartController extends Controller
 
             $data[] = $compaignId;
         }
-
-        return $data;
-    }
-
-    private function prepareMetricVisits($metric): int
-    {
-        $data = $metric[0]['metrics'][0];
 
         return $data;
     }
