@@ -78,6 +78,9 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
             case 'hy-lok':
                 routePath = 'chart.hy-lok.byDate'
                 break;
+            case 'fluidLine':
+                routePath = 'chart.fluidLine.byDate'
+                break;
         }
 
         axios.post(route(routePath), data)
@@ -149,6 +152,9 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
 
             case 'hy-lok':
                 routePath = 'chart.hy-lok.castom'
+                break;
+            case 'fluidLine':
+                routePath = 'chart.fluidLine.castom'
                 break;
         }
 

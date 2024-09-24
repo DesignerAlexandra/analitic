@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Chart\ChartFluidLineControler;
 use App\Http\Controllers\Chart\ChartHy_LokController;
 use App\Http\Controllers\Chart\ChartHylokController;
 use App\Http\Controllers\Chart\ChartSwageloController;
@@ -29,3 +30,8 @@ Route::get('/hy-lok', [ChartHy_LokController::class, 'index'])->name('chart.hy-l
 Route::post('/chart/hy-lok', [ChartHy_LokController::class, 'dataByDate'])->name('chart.hy-lok.byDate');
 Route::post('/chart/hy-lok/direct', [ChartHy_LokController::class, 'fetchDirect'])->name('chart.hy-lok.direct');
 Route::post('/chart/hy-lok/castomMetric', [ChartHy_LokController::class, 'getCastomMetric'])->name('chart.hy-lok.castom');
+
+Route::get('/fluidLine', [ChartFluidLineControler::class, 'index'])->name('chart.fluidLine');
+Route::post('/chart/fluidLine', [ChartFluidLineControler::class, 'dataByDate'])->name('chart.fluidLine.byDate');
+Route::post('/chart/fluidLine/direct', [ChartFluidLineControler::class, 'fetchDirect'])->name('chart.fluidLine.direct');
+Route::post('/chart/fluidLine/castomMetric', [ChartFluidLineControler::class, 'getCastomMetric'])->name('chart.fluidLine.castom');

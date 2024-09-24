@@ -9,6 +9,7 @@ const ControlPanelComponent = ({title}) => {
         swagelo: false,
         hylok: false,
         hy_lok: false,
+        fluidLine: false,
     }
 
     const [checkDisabled, setCheckDisabled] = useState(state);
@@ -26,6 +27,9 @@ const ControlPanelComponent = ({title}) => {
                 break;
             case 'hy-lok':
                 setCheckDisabled({...checkDisabled, hy_lok: true})
+                break;
+            case 'fluidLine':
+                setCheckDisabled({...checkDisabled, fluidLine: true})
                 break;
         
             default:
@@ -48,6 +52,9 @@ const ControlPanelComponent = ({title}) => {
                     </Link>
                     <Link href={route('chart.hy-lok')}>
                         <Button disabled={checkDisabled.hy_lok}>Hy-lok</Button>
+                    </Link>
+                    <Link href={route('chart.fluidLine')}>
+                        <Button disabled={checkDisabled.fliudLine}>fluidLine</Button>
                     </Link>
                 </ButtonGroup>
             </Grid>
