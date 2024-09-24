@@ -27,7 +27,8 @@ const ControlPanelComponent = ({ title }) => {
     wika: false,
     swagelo: false,
     hylok: false,
-    hy_lok: false
+    hy_lok: false,
+    fluidLine: false
   };
   const [checkDisabled, setCheckDisabled] = useState(state);
   useEffect(() => {
@@ -44,13 +45,17 @@ const ControlPanelComponent = ({ title }) => {
       case "hy-lok":
         setCheckDisabled({ ...checkDisabled, hy_lok: true });
         break;
+      case "fluidLine":
+        setCheckDisabled({ ...checkDisabled, fluidLine: true });
+        break;
     }
   }, [title]);
   return /* @__PURE__ */ jsx(Grid, { container: true, sx: { padding: "10px" }, children: /* @__PURE__ */ jsx(Grid, { item: true, xs: 12, children: /* @__PURE__ */ jsxs(ButtonGroup, { color: "info", variant: "contained", size: "large", "aria-label": "Large button group", children: [
     /* @__PURE__ */ jsx(Link, { href: route("chart.wika"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.wika, children: "Wika" }) }),
     /* @__PURE__ */ jsx(Link, { href: route("chart.swagelo"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.swagelo, children: "Swagelo" }) }),
     /* @__PURE__ */ jsx(Link, { href: route("chart.hylok"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.hylok, children: "Hylok" }) }),
-    /* @__PURE__ */ jsx(Link, { href: route("chart.hy-lok"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.hy_lok, children: "Hy-lok" }) })
+    /* @__PURE__ */ jsx(Link, { href: route("chart.hy-lok"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.hy_lok, children: "Hy-lok" }) }),
+    /* @__PURE__ */ jsx(Link, { href: route("chart.fluidLine"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.fliudLine, children: "fluidLine" }) })
   ] }) }) });
 };
 const ControlPanelComponent$1 = ControlPanelComponent;
@@ -162,6 +167,9 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
       case "hy-lok":
         routePath = "chart.hy-lok.byDate";
         break;
+      case "fluidLine":
+        routePath = "chart.fluidLine.byDate";
+        break;
     }
     axios.post(route(routePath), data).then((res) => {
       setInvoiceData({
@@ -221,6 +229,9 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
         break;
       case "hy-lok":
         routePath = "chart.hy-lok.castom";
+        break;
+      case "fluidLine":
+        routePath = "chart.fluidLine.castom";
         break;
     }
     axios.post(route(routePath)).then(async (res) => {

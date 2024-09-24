@@ -1,7 +1,7 @@
 {
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "resources/js/Components/Chart/ControlPanelComponent.jsx": [
-    "/build/assets/ChartPage-DPNgYj-G.js"
+    "/build/assets/ChartPage-Bi7XdYli.js"
   ],
   "resources/js/Components/Compaigns/ControlPanelComponent.jsx": [
     "/build/assets/CompaignsPage-B91X6V5j.js"
@@ -10,10 +10,10 @@
     "/build/assets/GuestLayout-DDh6SlH4.js"
   ],
   "resources/js/Components/MUIComponents/Chart/CalendarComponent.jsx": [
-    "/build/assets/ChartPage-DPNgYj-G.js"
+    "/build/assets/ChartPage-Bi7XdYli.js"
   ],
   "resources/js/Components/MUIComponents/Chart/TableComponent.jsx": [
-    "/build/assets/ChartPage-DPNgYj-G.js"
+    "/build/assets/ChartPage-Bi7XdYli.js"
   ],
   "resources/js/Components/MUIComponents/Compaigns/ModalComponent.jsx": [
     "/build/assets/CompaignsPage-B91X6V5j.js"
@@ -34,7 +34,7 @@
     "/build/assets/GuestLayout-DDh6SlH4.js"
   ],
   "resources/js/Pages/ChartPage.jsx": [
-    "/build/assets/ChartPage-DPNgYj-G.js"
+    "/build/assets/ChartPage-Bi7XdYli.js"
   ],
   "resources/js/Pages/CompaignsPage.jsx": [
     "/build/assets/CompaignsPage-B91X6V5j.js"
