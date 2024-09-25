@@ -233,11 +233,7 @@ abstract class ChartController extends Controller
             }
         });
 
-        $minDate = min($entryPoints);
-
-        $maxDate = max($entryPoints);
-
-        $fullEntryPoints = $this->prepareDataEntryPoints($minDate, $maxDate);
+        $fullEntryPoints = $this->prepareDataEntryPoints($dateFrom, $dateTo);
 
         $newChartPhone = [];
         $newChartInvoice = [];
