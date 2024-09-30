@@ -40,6 +40,9 @@ class UpdateDirectController extends Controller
         if($dateTo != $dateUpdateSwagelo) {
             UpdateDirect::where('direct_id', UpdateDirect::SWAGELO_HY_LOK)->update(['status_update' => 0]);
         }
+        if($dateTo != $dateUpdateSwagelo) {
+            UpdateDirect::where('direct_id', UpdateDirect::FLUIDLINE)->update(['status_update' => 0]);
+        }
 
         if (Direct::checkUpdate(UpdateDirect::HYLOK)) {
             $params[] = UpdateDirect::HYLOK;
@@ -49,6 +52,9 @@ class UpdateDirectController extends Controller
         }
         if (Direct::checkUpdate(UpdateDirect::SWAGELO_HY_LOK)) {
             $params[] = UpdateDirect::SWAGELO_HY_LOK;
+        }
+        if (Direct::checkUpdate(UpdateDirect::FLUIDLINE)) {
+            $params[] = UpdateDirect::FLUIDLINE;
         }
 
         if(!empty($params)) {
@@ -64,6 +70,9 @@ class UpdateDirectController extends Controller
     
                     case UpdateDirect::SWAGELO_HY_LOK:
                         $this->updateDirect($value, env('CLIENT_LOGIN_SWAGELO_HY_LOK'), env('AUTH_TOKEN_DIRECT_SWAGELO_HY_LOK'), 'swagelo_hy_lok');
+                        break;
+                    case UpdateDirect::FLUIDLINE:
+                        $this->updateDirect($value, env('CLIENT_LOGIN_FLUIDLINE'), env('AUTH_TOKEN_DIRECT_FLUIDLINE'), 'fluidline');
                         break;
                 }
             }

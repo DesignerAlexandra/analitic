@@ -12,6 +12,7 @@ class UpdateDirect extends Model
     public const HYLOK = 1;
     public const WIKA = 2;
     public const SWAGELO_HY_LOK = 3;
+    public const FLUIDLINE = 4;
 
     public const UPDATED = 1;
     public const DONT_UPDATED = 0;
