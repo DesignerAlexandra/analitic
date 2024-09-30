@@ -20,8 +20,8 @@ class ChartFluidLineControler extends ChartController
             new FluidLinePhone(),
             new SateliPhone(),
             new Direct(),
-            env('AUTH_TOKEN_METRIC_SWAGELO_HY_LOK'),
-            env('COUNTER_ID_METRIC_HY_LOK')
+            env('AUTH_TOKEN_METRIC_FLUIDLINE'),
+            env('COUNTER_ID_METRIC_FLUIDLINE')
         );
     }
 }
