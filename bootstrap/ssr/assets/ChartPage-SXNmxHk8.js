@@ -194,7 +194,6 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
       chart.update();
     }).catch((err) => console.log(err));
   };
-  console.log(generalData);
   const [dataMail, setDataMail] = useState(parse(chartMail));
   const [dataPhone, setDataPhone] = useState(parse(chartPhone));
   const [dataEntryPoints, setDataEntryPoints] = useState(entryPoints);
@@ -265,7 +264,6 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
         break;
     }
     axios.post(route(routePath), data).then(async (res) => {
-      console.log(true);
       setCastopMetric({
         cpl: res.data.cpl,
         cpc: res.data.cpc,

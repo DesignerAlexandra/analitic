@@ -110,7 +110,6 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
         })
         .catch(err => console.log(err))
     }
-    console.log(generalData);
     
     const [dataMail, setDataMail] = useState(parse(chartMail))
     const [dataPhone, setDataPhone] = useState(parse(chartPhone))
@@ -203,7 +202,6 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
 
         axios.post(route(routePath), data)
         .then(async res => {
-            console.log(true);
             
             setCastopMetric({
                 cpl: res.data.cpl,

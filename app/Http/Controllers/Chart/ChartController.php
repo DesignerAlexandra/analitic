@@ -7,6 +7,7 @@ use App\Models\UpdateDirect;
 use App\Services\APIHook\Yandex;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Inertia\Inertia;
 
 abstract class ChartController extends Controller
@@ -272,7 +273,19 @@ abstract class ChartController extends Controller
         $dateFrom = date('Y-m-d', strtotime($validated['dateFrom']));
         $dateTo = date('Y-m-d', strtotime($validated['dateTo']));
 
-        $compaignsId = $this->parserForMetricByCompaign($this->yandex->metricIdCompaign()['data']);
+        $compaignsId = Redis::get($this->title . '_data_metric_chart');
+
+        if(!$compaignsId) {
+
+            $compaignsId = $this->parserForMetricByCompaign($this->yandex->metricIdCompaign()['data']);
+
+            Redis::command('setex', [$this->title . '_data_metric_chart', 60 * 60 * 24, json_encode($compaignsId)]);
+
+        } else {
+
+            $compaignsId = json_decode($compaignsId, 1);
+
+        }
 
         $countCliks = $this->direct::where('Date', '>=', $dateFrom, 'AND', 'Date', '<=', $dateTo)->whereIn('CampaignId', $compaignsId)->sum('Clicks');
 
@@ -312,9 +325,24 @@ abstract class ChartController extends Controller
 
     public function getCastomMetric()
     {
-        $compaignsId = $this->parserForMetricByCompaign($this->yandex->metricIdCompaign()['data']);
 
-        $countCliks = $this->direct::whereIn('CampaignId', $compaignsId)->sum('Clicks');
+        $compaignsId = Redis::get($this->title . '_data_metric_chart');
+
+        if(!$compaignsId) {
+
+            $compaignsId = $this->parserForMetricByCompaign($this->yandex->metricIdCompaign()['data']);
+
+            $countCliks = $this->direct::whereIn('CampaignId', $compaignsId)->sum('Clicks');
+
+            Redis::command('setex', [$this->title . '_data_metric_chart', 60 * 60 * 24, json_encode($compaignsId)]);
+            Redis::command('setex', [$this->title . '_count_clicks', 60 * 60 * 24, $countCliks]);
+
+        } else {
+
+            $compaignsId = json_decode($compaignsId, 1);
+            $countCliks = Redis::get($this->title . '_count_clicks');
+
+        }
 
         $invoicePhone = $this->modelPhone::select('contact_phone_number')->distinct()->get();
 
@@ -323,27 +351,30 @@ abstract class ChartController extends Controller
             $phones[] = mb_substr($value['contact_phone_number'], 1, strlen($value['contact_phone_number']) - 1);
         }
 
-        $invoicePhones = $this->sateliPhone::whereIn('client_phone', $phones)->distinct()->get('client_phone', 'invoice_status', 'invoice_price');
+        $invoicePhones = $this->sateliPhone::whereIn('client_phone', $phones)->distinct()->get('client_phone');
 
         $phonesPrice = $this->sateliPhone::whereIn('client_phone', $phones)->distinct()->get('invoice_price')->where('invoice_status', 2)->sum('invoice_price');
 
-        $invoicesMail = $this->modelInvoice::select('invoice_date', 'invoice_status', 'client_mail', 'invoice_price')->distinct()->get();
+        $invoicesMail = $this->modelInvoice::select('client_mail')->distinct()->get();
 
         $mailPrice = $this->modelInvoice::select('invoice_price')->where('invoice_status', 2)->distinct()->get()->sum('invoice_price');
 
         $sumPrice = $this->direct::whereIn('CampaignId', $compaignsId)->sum('Cost');
 
+        $countInvoice = $invoicesMail->count();
+        $countPhones = $invoicePhones->count();
+
         $cpl = (int)$sumPrice / (int)$countCliks;
 
-        $cpc = (int)$sumPrice / ($invoicesMail->count() + $invoicePhones->count());
+        $cpc = (int)$sumPrice / ($countInvoice + $countPhones);
 
         return [
             'cpl' => number_format($cpl, 2, '.', ''),
             'cpc' => number_format($cpc, 2, '.', ''),
-            'invoices' => $invoicesMail->count() + $invoicePhones->count(),
+            'invoices' => $countInvoice + $countPhones,
             'visits' => $countCliks,
-            'invoicesMail' => $invoicesMail->count(),
-            'invoicePhones' => $invoicePhones->count(),
+            'invoicesMail' => $countInvoice,
+            'invoicePhones' => $countPhones,
             'mailPrice' => number_format($mailPrice, 2, '.', ''),
             'phonePrice' => number_format($phonesPrice, 2, '.', ''),
 
