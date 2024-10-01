@@ -93,16 +93,7 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
                 sumPriceForCalls: res.data.sumPriceForCalls
             })
 
-            setCastopMetric({
-                cpl: res.data.castomMetric.cpl,
-                cpc: res.data.castomMetric.cpc,
-                invoices: res.data.castomMetric.invoices,
-                visits: res.data.castomMetric.visits,
-                invoicesMail: res.data.castomMetric.invoicesMail,
-                invoicePhones: res.data.castomMetric.invoicePhones,
-                mailPrice: res.data.castomMetric.mailPrice,
-                phonePrice: res.data.castomMetric.phonePrice,
-            })
+            fetchCastomMetricByDate(dateFrom, dateTo)
             
             chart.data.labels = res.data.entryPoints.map(point => point)
             chart.data.datasets = [
@@ -161,6 +152,58 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
 
         axios.post(route(routePath))
         .then(async res => {
+            
+            setCastopMetric({
+                cpl: res.data.cpl,
+                cpc: res.data.cpc,
+                invoices: res.data.invoices,
+                visits: res.data.visits,
+                invoicesMail: res.data.invoicesMail,
+                invoicePhones: res.data.invoicePhones,
+                mailPrice: res.data.mailPrice,
+                phonePrice: res.data.phonePrice,
+            })
+            
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
+    const fetchCastomMetricByDate = (dateFrom, dateTo) => {
+
+        const data = new FormData()
+        data.set('dateFrom', dateFrom)
+        data.set('dateTo', dateTo)
+
+        setCastopMetric(false)
+
+        let routePath = ''
+
+        switch (titleSite) {            
+            case 'wika':
+                routePath = 'chart.wika.byDateCastom'
+                break;
+
+            case 'swagelo':
+                routePath = 'chart.swagelo.byDateCastom'
+                break;
+
+            case 'hylok':
+                routePath = 'chart.hylok.byDateCastom'
+                break;
+
+            case 'hy-lok':
+                routePath = 'chart.hy-lok.byDateCastom'
+                break;
+            case 'fluidLine':
+                routePath = 'chart.fluidLine.byDateCastom'
+                break;
+        }
+
+        axios.post(route(routePath), data)
+        .then(async res => {
+            console.log(true);
             
             setCastopMetric({
                 cpl: res.data.cpl,

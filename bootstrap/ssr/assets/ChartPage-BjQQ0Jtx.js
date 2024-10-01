@@ -55,7 +55,7 @@ const ControlPanelComponent = ({ title }) => {
     /* @__PURE__ */ jsx(Link, { href: route("chart.swagelo"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.swagelo, children: "Swagelo" }) }),
     /* @__PURE__ */ jsx(Link, { href: route("chart.hylok"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.hylok, children: "Hylok" }) }),
     /* @__PURE__ */ jsx(Link, { href: route("chart.hy-lok"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.hy_lok, children: "Hy-lok" }) }),
-    /* @__PURE__ */ jsx(Link, { href: route("chart.fluidLine"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.fliudLine, children: "fluidLine" }) })
+    /* @__PURE__ */ jsx(Link, { href: route("chart.fluidLine"), children: /* @__PURE__ */ jsx(Button, { disabled: checkDisabled.fluidLine, children: "fluidLine" }) })
   ] }) }) });
 };
 const ControlPanelComponent$1 = ControlPanelComponent;
@@ -179,16 +179,7 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
         countCalls: res.data.countCalls,
         sumPriceForCalls: res.data.sumPriceForCalls
       });
-      setCastopMetric({
-        cpl: res.data.castomMetric.cpl,
-        cpc: res.data.castomMetric.cpc,
-        invoices: res.data.castomMetric.invoices,
-        visits: res.data.castomMetric.visits,
-        invoicesMail: res.data.castomMetric.invoicesMail,
-        invoicePhones: res.data.castomMetric.invoicePhones,
-        mailPrice: res.data.castomMetric.mailPrice,
-        phonePrice: res.data.castomMetric.phonePrice
-      });
+      fetchCastomMetricByDate(dateFrom, dateTo);
       chart.data.labels = res.data.entryPoints.map((point) => point);
       chart.data.datasets = [
         {
@@ -203,6 +194,7 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
       chart.update();
     }).catch((err) => console.log(err));
   };
+  console.log(generalData);
   const [dataMail, setDataMail] = useState(parse(chartMail));
   const [dataPhone, setDataPhone] = useState(parse(chartPhone));
   const [dataEntryPoints, setDataEntryPoints] = useState(entryPoints);
@@ -235,6 +227,45 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
         break;
     }
     axios.post(route(routePath)).then(async (res) => {
+      setCastopMetric({
+        cpl: res.data.cpl,
+        cpc: res.data.cpc,
+        invoices: res.data.invoices,
+        visits: res.data.visits,
+        invoicesMail: res.data.invoicesMail,
+        invoicePhones: res.data.invoicePhones,
+        mailPrice: res.data.mailPrice,
+        phonePrice: res.data.phonePrice
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+  const fetchCastomMetricByDate = (dateFrom2, dateTo2) => {
+    const data = new FormData();
+    data.set("dateFrom", dateFrom2);
+    data.set("dateTo", dateTo2);
+    setCastopMetric(false);
+    let routePath = "";
+    switch (titleSite) {
+      case "wika":
+        routePath = "chart.wika.byDateCastom";
+        break;
+      case "swagelo":
+        routePath = "chart.swagelo.byDateCastom";
+        break;
+      case "hylok":
+        routePath = "chart.hylok.byDateCastom";
+        break;
+      case "hy-lok":
+        routePath = "chart.hy-lok.byDateCastom";
+        break;
+      case "fluidLine":
+        routePath = "chart.fluidLine.byDateCastom";
+        break;
+    }
+    axios.post(route(routePath), data).then(async (res) => {
+      console.log(true);
       setCastopMetric({
         cpl: res.data.cpl,
         cpc: res.data.cpc,

@@ -54,7 +54,7 @@ const ControlPanelComponent = ({title}) => {
                         <Button disabled={checkDisabled.hy_lok}>Hy-lok</Button>
                     </Link>
                     <Link href={route('chart.fluidLine')}>
-                        <Button disabled={checkDisabled.fliudLine}>fluidLine</Button>
+                        <Button disabled={checkDisabled.fluidLine}>fluidLine</Button>
                     </Link>
                 </ButtonGroup>
             </Grid>

@@ -12,26 +12,31 @@ Route::get('/', [ChartWikaController::class, 'index'])->name('chart.wika');
 Route::post('/chart/wika', [ChartWikaController::class, 'dataByDate'])->name('chart.wika.byDate');
 Route::post('/chart/wika/direct', [ChartWikaController::class, 'fetchDirect'])->name('chart.wika.direct');
 Route::post('/chart/wika/castomMetric', [ChartWikaController::class, 'getCastomMetric'])->name('chart.wika.castom');
+Route::post('/chart/wika/castomMetricByDate', [ChartWikaController::class, 'getDataByDateCastomMetric'])->name('chart.wika.byDateCastom');
 
 
 Route::get('/swagelo', [ChartSwageloController::class, 'index'])->name('chart.swagelo');
 Route::post('/chart/swagelo', [ChartSwageloController::class, 'dataByDate'])->name('chart.swagelo.byDate');
 Route::post('/chart/swagelo/direct', [ChartSwageloController::class, 'fetchDirect'])->name('chart.swagelo.direct');
 Route::post('/chart/swagelo/castomMetric', [ChartSwageloController::class, 'getCastomMetric'])->name('chart.swagelo.castom');
+Route::post('/chart/swagelo/castomMetricByDate', [ChartSwageloController::class, 'getDataByDateCastomMetric'])->name('chart.swagelo.byDateCastom');
 
 
 Route::get('/hylok', [ChartHylokController::class, 'index'])->name('chart.hylok');
 Route::post('/chart/hylok', [ChartHylokController::class, 'dataByDate'])->name('chart.hylok.byDate');
 Route::post('/chart/hylok/direct', [ChartHylokController::class, 'fetchDirect'])->name('chart.hylok.direct');
 Route::post('/chart/hylok/castomMetric', [ChartHylokController::class, 'getCastomMetric'])->name('chart.hylok.castom');
+Route::post('/chart/hylok/castomMetricByDate', [ChartHylokController::class, 'getDataByDateCastomMetric'])->name('chart.hylok.byDateCastom');
 
 
 Route::get('/hy-lok', [ChartHy_LokController::class, 'index'])->name('chart.hy-lok');
 Route::post('/chart/hy-lok', [ChartHy_LokController::class, 'dataByDate'])->name('chart.hy-lok.byDate');
 Route::post('/chart/hy-lok/direct', [ChartHy_LokController::class, 'fetchDirect'])->name('chart.hy-lok.direct');
 Route::post('/chart/hy-lok/castomMetric', [ChartHy_LokController::class, 'getCastomMetric'])->name('chart.hy-lok.castom');
+Route::post('/chart/hy-lok/castomMetricByDate', [ChartHy_LokController::class, 'getDataByDateCastomMetric'])->name('chart.hy-lok.byDateCastom');
 
 Route::get('/fluidLine', [ChartFluidLineControler::class, 'index'])->name('chart.fluidLine');
 Route::post('/chart/fluidLine', [ChartFluidLineControler::class, 'dataByDate'])->name('chart.fluidLine.byDate');
 Route::post('/chart/fluidLine/direct', [ChartFluidLineControler::class, 'fetchDirect'])->name('chart.fluidLine.direct');
 Route::post('/chart/fluidLine/castomMetric', [ChartFluidLineControler::class, 'getCastomMetric'])->name('chart.fluidLine.castom');
+Route::post('/chart/fluidLine/castomMetricByDate', [ChartFluidLineControler::class, 'getDataByDateCastomMetric'])->name('chart.fluidLine.byDateCastom');
