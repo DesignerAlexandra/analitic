@@ -32,7 +32,7 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
         ]
         chart.update()
         setInvoiceData(generalData)
-        setCastopMetric(false)
+        setCastomMetric(false)
         fetchCastomMetric()
     }
 
@@ -122,7 +122,7 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
     const [chart, setChart] = useState('')
     const [titleSite, setTitleSite] = useState(title)
     const [dateUpdate, setDateUpdate] = useState(dateUpdateDirect)
-    const [castomMetric, setCastopMetric] = useState(false)
+    const [castomMetric, setCastomMetric] = useState(false)
 
     const fetchCastomMetric = () => {
 
@@ -152,7 +152,7 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
         axios.post(route(routePath))
         .then(async res => {
             
-            setCastopMetric({
+            setCastomMetric({
                 cpl: res.data.cpl,
                 cpc: res.data.cpc,
                 invoices: res.data.invoices,
@@ -175,7 +175,7 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
         data.set('dateFrom', dateFrom)
         data.set('dateTo', dateTo)
 
-        setCastopMetric(false)
+        setCastomMetric(false)
 
         let routePath = ''
 
@@ -203,7 +203,7 @@ export default function ChartPage({chartPhone, chartMail, entryPoints, generalDa
         axios.post(route(routePath), data)
         .then(async res => {
             
-            setCastopMetric({
+            setCastomMetric({
                 cpl: res.data.cpl,
                 cpc: res.data.cpc,
                 invoices: res.data.invoices,

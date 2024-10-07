@@ -130,7 +130,7 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
     ];
     chart.update();
     setInvoiceData(generalData);
-    setCastopMetric(false);
+    setCastomMetric(false);
     fetchCastomMetric();
   };
   const parse = (chartData) => {
@@ -205,7 +205,7 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
   const [chart, setChart] = useState("");
   const [titleSite, setTitleSite] = useState(title);
   const [dateUpdate, setDateUpdate] = useState(dateUpdateDirect);
-  const [castomMetric, setCastopMetric] = useState(false);
+  const [castomMetric, setCastomMetric] = useState(false);
   const fetchCastomMetric = () => {
     let routePath = "";
     switch (titleSite) {
@@ -226,7 +226,7 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
         break;
     }
     axios.post(route(routePath)).then(async (res) => {
-      setCastopMetric({
+      setCastomMetric({
         cpl: res.data.cpl,
         cpc: res.data.cpc,
         invoices: res.data.invoices,
@@ -244,7 +244,7 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
     const data = new FormData();
     data.set("dateFrom", dateFrom2);
     data.set("dateTo", dateTo2);
-    setCastopMetric(false);
+    setCastomMetric(false);
     let routePath = "";
     switch (titleSite) {
       case "wika":
@@ -264,7 +264,7 @@ function ChartPage({ chartPhone, chartMail, entryPoints, generalData, dateUpdate
         break;
     }
     axios.post(route(routePath), data).then(async (res) => {
-      setCastopMetric({
+      setCastomMetric({
         cpl: res.data.cpl,
         cpc: res.data.cpc,
         invoices: res.data.invoices,
