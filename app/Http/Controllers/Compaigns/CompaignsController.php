@@ -142,10 +142,22 @@ abstract class CompaignsController extends Controller
 
     private function getDirectDataByCompaignsId($ids)
     {
-        $data = $this->direct::select('CampaignId', 'CampaignName', 'AdGroupId', 'AdGroupName', 'Clicks', 'Cost', 'Date')
-        ->whereIn('CampaignId', $ids)
-        ->get()
-        ->toArray();
+        $directData = Redis::get($this->title . '_data_metric_byCompaigns');
+
+        if(!$directData) {
+
+            $data = $this->direct::select('CampaignId', 'CampaignName', 'AdGroupId', 'AdGroupName', 'Clicks', 'Cost', 'Date')
+            ->whereIn('CampaignId', $ids)
+            ->get()
+            ->toArray();
+
+            Redis::command('setex', [$this->title . '_data_metric_byCompaigns', 60 * 60 * 24 * 7, json_encode($data)]);
+
+        } else {
+
+            $data = json_decode($directData, 1);
+
+        }
 
         return $data;
     }
