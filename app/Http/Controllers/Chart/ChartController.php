@@ -340,9 +340,19 @@ abstract class ChartController extends Controller
 
         $sumPrice = $this->direct::where('Date', '>=', $dateFrom, 'AND', 'Date', '<=', $dateTo)->whereIn('CampaignId', $compaignsId)->sum('Cost');
 
-        $cpl = (int)$sumPrice / (int)$countCliks;
+        if((int)$sumPrice != 0 && (int)$countCliks != 0) {
+            $cpl = (int)$sumPrice / (int)$countCliks;
+        } else {
+            $cpl = (int)$sumPrice;
+        }
+        
+        if((int)$sumPrice != 0 && ($countInvoice + $countPhones) != 0) {
+            $cpc = (int)$sumPrice / ($countInvoice + $countPhones);
+        } else {
+            $cpc = (int)$sumPrice;
+        }
 
-        $cpc = (int)$sumPrice / ($countInvoice + $countPhones);
+        
 
         return [
             'cpl' => number_format($cpl, 2, '.', ''),
