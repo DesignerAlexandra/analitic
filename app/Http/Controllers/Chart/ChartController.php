@@ -287,6 +287,44 @@ abstract class ChartController extends Controller
 
         }
 
+        $dataInvoice = $this->modelInvoice::select('invoice_date', 'invoice_status', 'client_mail', 'invoice_price')
+        ->where([
+            ['invoice_date', '>=', "$dateFrom 00:00:00"],
+            ['invoice_date', '<=', "$dateTo 23:59:59"]
+        ])->distinct()->get();
+
+        $sateliPhone = $this->sateliPhone::select('client_phone', 'invoice_status', 'invoice_price', 'invoice_date')->get();
+
+        $haystack = [];
+        foreach ($sateliPhone as $key => $value) {
+            $haystack[$key] = $value['client_phone'];
+        }
+
+        $wikaPhoneBy1C = $this->modelPhone::select('contact_phone_number')->distinct()->get();
+
+        $wikaPhone = [];
+        foreach ($wikaPhoneBy1C as $value) {
+            $phone = $value['contact_phone_number'];
+            $subPhone = mb_substr($phone, 1, strlen($phone) - 1);
+            $key = array_search($subPhone, $haystack);
+
+            if(!empty($key) && !empty($sateliPhone[$key])) {
+                $wikaPhone[] = $sateliPhone[$key];
+            }
+        }
+
+        $countInvoice = 0;
+        foreach ($dataInvoice as $key => $dateInvoice) {
+            $countInvoice++;
+        }
+
+        $countPhones = 0;
+        foreach ($wikaPhone as $value) {
+            if(strtotime("$dateFrom 00:00:00") <= strtotime($value['invoice_date']) && strtotime("$dateTo 23:59:59") >= strtotime($value['invoice_date'])) {
+                $countPhones++;
+            }
+        }
+
         $countCliks = $this->direct::where('Date', '>=', $dateFrom, 'AND', 'Date', '<=', $dateTo)->whereIn('CampaignId', $compaignsId)->sum('Clicks');
 
         $invoicePhone = $this->modelPhone::select('contact_phone_number')->distinct()->get();
@@ -296,18 +334,11 @@ abstract class ChartController extends Controller
             $phones[] = mb_substr($value['contact_phone_number'], 1, strlen($value['contact_phone_number']) - 1);
         }
 
-        $invoicePhones = $this->sateliPhone::where('invoice_date', '>=', $dateFrom, 'AND', 'invoice_date', '<=', $dateTo)->whereIn('client_phone', $phones)->distinct()->get('client_phone', 'invoice_status', 'invoice_price', 'invoice_date');
-
-        $phonesPrice = $this->sateliPhone::where('invoice_date', '>=', $dateFrom, 'AND', 'invoice_date', '<=', $dateTo)->whereIn('client_phone', $phones)->distinct()->get('invoice_price')->where('invoice_status', 2)->sum('invoice_price');
-
-        $invoicesMail = $this->modelInvoice::where('invoice_date', '>=', $dateFrom, 'AND', 'invoice_date', '<=', $dateTo)->distinct()->get('invoice_date', 'invoice_status', 'client_mail', 'invoice_price');
+        $phonesPrice = $this->sateliPhone::whereIn('client_phone', $phones)->where('invoice_date', '>=', $dateFrom, 'AND', 'invoice_date', '<=', $dateTo)->distinct()->get('invoice_price')->where('invoice_status', 2)->sum('invoice_price');
 
         $mailPrice = $this->modelInvoice::where('invoice_status', 2)->where('invoice_date', '>=', $dateFrom, 'AND', 'invoice_date', '<=', $dateTo)->distinct()->get('invoice_price')->sum('invoice_price');
 
         $sumPrice = $this->direct::where('Date', '>=', $dateFrom, 'AND', 'Date', '<=', $dateTo)->whereIn('CampaignId', $compaignsId)->sum('Cost');
-
-        $countInvoice = $invoicesMail->count();
-        $countPhones = $invoicePhones->count();
 
         $cpl = (int)$sumPrice / (int)$countCliks;
 
